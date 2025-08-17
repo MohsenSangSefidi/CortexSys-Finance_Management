@@ -8,11 +8,6 @@ class RegisterAccountSerializer(serializers.ModelSerializer):
         model = UserModel
         fields = ['nickname', 'email', 'password']
 
-    def validate_email(self, value):
-        if not re.match(r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$', value):
-            raise serializers.ValidationError("Invalid email format")
-        return value.lower()
-
 
 class LoginAccountSerializer(serializers.Serializer):
     email = serializers.EmailField()

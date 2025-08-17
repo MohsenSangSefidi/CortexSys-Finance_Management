@@ -10,7 +10,7 @@ class TransactionModel(models.Model):
     type = models.CharField(choices=type_choices, max_length=7)
     date = models.DateField()
     notes = models.TextField()
-    user = models.ForeignKey(UserModel, on_delete=models.CASCADE)
+    user = models.ForeignKey(UserModel, on_delete=models.CASCADE, related_name='transactions')
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

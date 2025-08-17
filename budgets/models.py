@@ -7,7 +7,7 @@ class BudgetModel(models.Model):
     total_amount = models.IntegerField()
     start_date = models.DateField()
     end_date = models.DateField()
-    user = models.ForeignKey(UserModel, on_delete=models.CASCADE)
+    user = models.ForeignKey(UserModel, on_delete=models.CASCADE, related_name='budgets')
 
     def __str__(self):
         return self.title
