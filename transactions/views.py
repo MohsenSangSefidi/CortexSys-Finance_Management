@@ -24,7 +24,7 @@ class TransactionView(views.APIView):
         return Response(
             {
                 "result": True,
-                "massage": "success",
+                "message": "success",
                 "data": data.data,
             },
             status=status.HTTP_200_OK,
@@ -164,7 +164,8 @@ class TransactionView(views.APIView):
             )
         except TransactionModel.DoesNotExist:
             return Response(
-                {"result": False, "message": "Transaction does not exist", "data": []}
+                {"result": False, "message": "Transaction does not exist", "data": []},
+                status=status.HTTP_404_NOT_FOUND,
             )
 
         # Delete Transaction
