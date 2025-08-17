@@ -15,14 +15,28 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='BudgetModel',
+            name="BudgetModel",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=100)),
-                ('total_amount', models.IntegerField()),
-                ('start_date', models.DateField()),
-                ('end_date', models.DateField()),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(max_length=100)),
+                ("total_amount", models.IntegerField()),
+                ("start_date", models.DateField()),
+                ("end_date", models.DateField()),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
     ]
