@@ -107,7 +107,8 @@ class BudgetView(views.APIView):
             budget = BudgetModel.objects.get(id=budget_id, user_id=user.id)
         except BudgetModel.DoesNotExist:
             return Response(
-                {"result": False, "massage": "Budget does not exist", "data": []}
+                {"result": False, "massage": "Budget does not exist", "data": []},
+                status=status.HTTP_404_NOT_FOUND,
             )
 
         # Update budget
@@ -153,7 +154,8 @@ class BudgetView(views.APIView):
             budget = BudgetModel.objects.get(id=budget_id, user_id=user.id)
         except BudgetModel.DoesNotExist:
             return Response(
-                {"result": False, "massage": "Budget does not exist", "data": []}
+                {"result": False, "massage": "Budget does not exist", "data": []},
+                status=status.HTTP_404_NOT_FOUND,
             )
 
         # Delete budget

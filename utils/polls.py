@@ -16,7 +16,7 @@ def authenticate_jwt_token(jwt_token):
     except:
         # Set Response Data
         response.data = {
-            "result": "false",
+            "result": False,
             "message": "invalid_token or expired",
             "data": [],
         }
@@ -28,7 +28,7 @@ def authenticate_jwt_token(jwt_token):
         user = UserModel.objects.get(email=payload["user_email"])
     except UserModel.DoesNotExist:
         response.data = {
-            "result": "false",
+            "result": False,
             "message": "user does not exist",
             "data": [],
         }
