@@ -1,9 +1,9 @@
-from django.conf import settings
-from django.db import IntegrityError
+from utils.polls import authenticate_jwt_token
 from rest_framework.response import Response
 from rest_framework import views, status
+from django.db import IntegrityError
 from django.utils import timezone
-
+from django.conf import settings
 import jwt
 
 from .serializers import RegisterAccountSerializer, LoginAccountSerializer
@@ -65,7 +65,7 @@ class RegisterAccountView(views.APIView):
             user.save()
         except IntegrityError:
             return Response(
-                {"result": False, "message": "User already exists", 'data': []},
+                {"result": False, "message": "User already exists", "data": []},
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
@@ -140,6 +140,32 @@ class LoginAccountView(views.APIView):
             },
             status=status.HTTP_200_OK,
         )
+
+
+class UserInfo(views.APIView):
+    def get(self, request, *args, **kwargs):
+        # Validate user authentications
+        jwt_token = request.COOKIES.get("access_token")
+
+        result, response, user = authenticate_jwt_token(jwt_token)
+
+        if result:
+            return response
+
+        return Response({
+            'result': True,
+            'message': 'successfully',
+            'data': [
+                {
+                    'id': user.id,
+                    'nickname': user.nickname,
+                    'email': user.email,
+                    'last_login': user.last_login,
+                    'income': user.income(),
+                    'expense': user.expense(),
+                }
+            ]
+        }, status=status.HTTP_200_OK)
 
 
 class RefreshTokenView(views.APIView):

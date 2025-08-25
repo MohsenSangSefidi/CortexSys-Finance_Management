@@ -71,15 +71,28 @@ finance_management/
 
 ### راه‌اندازی با Docker (توصیه شده)
 
-1. **کلون کردن ریپازیتوری**:
+1. **Clone Project**:
    ```bash
    git clone https://github.com/yourusername/finance-management-api.git
    cd finance-management-api
    ```
 
-2. **ایجاد فایل محیطی**:
-   - ایجاد فایل env. و تنظیم مقادیر
-
+2. **.env**:
+   ```.env
+   # Django Settings
+   DEBUG=1
+   ALLOWED_HOSTS=localhost,127.0.0.1,0.0.0.0
+   
+   # Database Settings ( For Run Without Docker )
+   POSTGRES_DB=finance_management_db
+   POSTGRES_USER=postgres
+   POSTGRES_PASSWORD=postgres
+   POSTGRES_HOST=localhost
+   POSTGRES_PORT=5432
+   
+   # Database URL ( Add it When Want Run With Docker )
+   DATABASE_URL=postgresql://postgres:postgres@db:5432/finance_management_db
+   ```
     
 3. **اجرای پروژه با Docker Compose**:
    ```bash
@@ -98,7 +111,6 @@ finance_management/
 
 6. **دسترسی به پروژه**:
    - API: http://0.0.0.0:8000
-   - Admin Panel: http://0.0.0.0:8000/admin
 
 ### راه‌اندازی برای توسعه (بدون Docker)
 
@@ -110,19 +122,32 @@ finance_management/
 2. **تنظیمات**:
    - یک دیتابیس PostgreSQL ایجاد کنید
    - فایل settings.py را با اطلاعات دیتابیس خود به روز کنید
-   - ایجاد فایل env. و تنظیم مقادیر
 
-3. **اجرای migrations**:
+3. **.env**:
+   ```.env
+   # Django Settings
+   DEBUG=1
+   ALLOWED_HOSTS=localhost,127.0.0.1,0.0.0.0
+   
+   # Database Settings ( For Run Without Docker )
+   POSTGRES_DB=finance_management_db
+   POSTGRES_USER=postgres
+   POSTGRES_PASSWORD=postgres
+   POSTGRES_HOST=localhost
+   POSTGRES_PORT=5432
+   ```
+
+4. **اجرای migrations**:
    ```bash
    python manage.py migrate
    ```
 
-4. **ایجاد کاربر سوپرادمین**:
+5. **ایجاد کاربر سوپرادمین**:
    ```bash
    python manage.py createsuperuser
    ```
 
-5. **اجرای سرور**:
+6. **اجرای سرور**:
    ```bash
    python manage.py runserver
    ```

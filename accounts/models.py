@@ -46,3 +46,19 @@ class UserModel(AbstractUser):
 
     def __str__(self):
         return self.email
+
+    def income(self):
+        total = 0
+
+        for transaction in self.transactions.filter(type="Income"):
+            total += transaction.amount
+
+        return total
+
+    def expense(self):
+        total = 0
+
+        for transaction in self.transactions.filter(type="Expense"):
+            total += int(transaction.amount)
+
+        return total
