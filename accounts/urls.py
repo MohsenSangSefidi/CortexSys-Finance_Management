@@ -4,6 +4,6 @@ from .views import RegisterAccountView, LoginAccountView, RefreshTokenView, User
 urlpatterns = [
     path("register/", RegisterAccountView.as_view(), name="register"),
     path("login/", LoginAccountView.as_view(), name="login"),
-    path('user-info/', UserInfo.as_view(), name='user_info'),
+    path("user-info/", UserInfo.as_view(), name="user_info"),
     path("refresh/", RefreshTokenView.as_view(), name="refresh"),
 ]

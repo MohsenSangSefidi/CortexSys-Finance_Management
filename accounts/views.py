@@ -152,20 +152,23 @@ class UserInfo(views.APIView):
         if result:
             return response
 
-        return Response({
-            'result': True,
-            'message': 'successfully',
-            'data': [
-                {
-                    'id': user.id,
-                    'nickname': user.nickname,
-                    'email': user.email,
-                    'last_login': user.last_login,
-                    'income': user.income(),
-                    'expense': user.expense(),
-                }
-            ]
-        }, status=status.HTTP_200_OK)
+        return Response(
+            {
+                "result": True,
+                "message": "successfully",
+                "data": [
+                    {
+                        "id": user.id,
+                        "nickname": user.nickname,
+                        "email": user.email,
+                        "last_login": user.last_login,
+                        "income": user.income(),
+                        "expense": user.expense(),
+                    }
+                ],
+            },
+            status=status.HTTP_200_OK,
+        )
 
 
 class RefreshTokenView(views.APIView):
