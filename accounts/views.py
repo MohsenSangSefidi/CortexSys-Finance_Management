@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.db import IntegrityError
 from rest_framework.response import Response
 from rest_framework import views, status
 from django.utils import timezone
@@ -55,12 +56,18 @@ class RegisterAccountView(views.APIView):
         password = serializer.validated_data.get("password")
 
         # Create account object
-        user = UserModel.objects.create_user(
-            nickname=nick_name,
-            email=email.lower(),
-        )
-        user.set_password(password)
-        user.save()
+        try:
+            user = UserModel.objects.create_user(
+                nickname=nick_name,
+                email=email.lower(),
+            )
+            user.set_password(password)
+            user.save()
+        except IntegrityError:
+            return Response(
+                {"result": False, "message": "User already exists", 'data': []},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
 
         # Return response
         return Response(
